@@ -1,0 +1,28 @@
+<section class="search">
+  <h1>Find a flight</h1>
+
+  <sky-search-form [airports]="airports()" [loading]="loading()" (search)="onSearch($event)" />
+
+  @if (error()) {
+    <p class="banner-error">{{ error() }}</p>
+  }
+
+  @if (loading()) {
+    <div class="state">
+      <span class="spinner" aria-hidden="true"></span>
+      <span>Searching flights…</span>
+    </div>
+  } @else if (isEmpty()) {
+    <div class="state empty">
+      <h3>No flights match your search</h3>
+      <p>Try a different route or date.</p>
+    </div>
+  } @else if (searched()) {
+    <sky-results-table
+      [rows]="sortedResults()"
+      [sortKey]="sortKey()"
+      (sortChange)="onSortChange($event)"
+      (select)="onSelect($event)"
+    />
+  }
+</section>

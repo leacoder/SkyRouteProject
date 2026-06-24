@@ -1,0 +1,108 @@
+.booking {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summary-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.summary-head h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.route-meta {
+  margin: 0.4rem 0 0;
+  color: var(--sky-muted);
+}
+
+.route-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #eef3f9;
+  color: var(--sky-muted);
+}
+
+.route-tag.intl {
+  background: #e8f5e9;
+  color: var(--sky-success);
+}
+
+.breakdown h3,
+.passenger-form h3 {
+  margin-bottom: 0.75rem;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  color: var(--sky-muted);
+}
+
+.breakdown-row.total {
+  border-top: 1px solid var(--sky-border);
+  margin-top: 0.35rem;
+  padding-top: 0.6rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sky-text);
+}
+
+.passenger-form .field {
+  margin-bottom: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.confirmation {
+  text-align: center;
+}
+
+.confirmation h1 {
+  color: var(--sky-success);
+}
+
+.reference {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.confirm-grid {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.4rem 1.5rem;
+  justify-content: center;
+  margin: 0 0 1.25rem;
+  text-align: left;
+}
+
+.confirm-grid dt {
+  color: var(--sky-muted);
+  font-weight: 600;
+}
+
+.confirm-grid dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.state-empty {
+  text-align: center;
+}

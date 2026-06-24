@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/backend/">
+    <Project Path="backend/SkyRoute.Api/SkyRoute.Api.csproj" />
+    <Project Path="backend/SkyRoute.Domain.Tests/SkyRoute.Domain.Tests.csproj" />
+    <Project Path="backend/SkyRoute.Domain/SkyRoute.Domain.csproj" />
+  </Folder>
+</Solution>

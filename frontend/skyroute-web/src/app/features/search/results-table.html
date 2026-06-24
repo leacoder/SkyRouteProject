@@ -1,0 +1,40 @@
+<div class="toolbar">
+  <span class="count">{{ rows().length }} flights found</span>
+  <div class="sort">
+    <label for="sort">Sort by</label>
+    <select id="sort" [value]="sortKey()" (change)="onSort($any($event.target).value)">
+      @for (option of sortOptions; track option.key) {
+        <option [value]="option.key">{{ option.label }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+<div class="rows">
+  @for (flight of rows(); track flight.id) {
+    <article class="flight card">
+      <div class="flight-main">
+        <div class="airline">
+          <span class="provider">{{ flight.provider }}</span>
+          <span class="number">{{ flight.flightNumber }}</span>
+          <span class="cabin">{{ flight.cabin }}</span>
+        </div>
+        <div class="times">
+          <span class="time">{{ flight.departureTime | date: 'HH:mm' : 'UTC' }}</span>
+          <span class="arrow">→</span>
+          <span class="time">{{ flight.arrivalTime | date: 'HH:mm' : 'UTC' }}</span>
+          <span class="duration">{{ formatDuration(flight.durationMinutes) }}</span>
+        </div>
+      </div>
+
+      <div class="flight-price">
+        <div class="price-block">
+          <span class="total">USD {{ flight.total | number: '1.2-2' }}</span>
+          <span class="total-label">total · {{ flight.passengerCount }} pax</span>
+          <span class="per-person">USD {{ flight.perPassenger | number: '1.2-2' }} per person</span>
+        </div>
+        <button class="btn-primary" (click)="select.emit(flight)">Select</button>
+      </div>
+    </article>
+  }
+</div>

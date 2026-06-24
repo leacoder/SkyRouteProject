@@ -1,0 +1,100 @@
+@if (context(); as ctx) {
+  @if (confirmation(); as confirmed) {
+    <section class="confirmation card">
+      <h1>Booking confirmed ✓</h1>
+      <p class="reference">Reference code: <strong>{{ confirmed.referenceCode }}</strong></p>
+      <dl class="confirm-grid">
+        <dt>Flight</dt>
+        <dd>{{ confirmed.provider }} {{ confirmed.flightNumber }}</dd>
+        <dt>Document</dt>
+        <dd>{{ confirmed.documentType === 'Passport' ? 'Passport' : 'National ID' }}</dd>
+        <dt>Passengers</dt>
+        <dd>{{ confirmed.passengerCount }}</dd>
+        <dt>Total paid</dt>
+        <dd>{{ confirmed.currency }} {{ confirmed.total | number: '1.2-2' }}</dd>
+      </dl>
+      <button class="btn-primary" (click)="backToSearch()">Search again</button>
+    </section>
+  } @else {
+    <section class="booking">
+      <h1>Review &amp; book</h1>
+
+      <div class="card summary">
+        <div class="summary-head">
+          <h2>
+            {{ ctx.origin.city }} ({{ ctx.origin.code }}) → {{ ctx.destination.city }} ({{ ctx.destination.code }})
+          </h2>
+          <span class="route-tag" [class.intl]="ctx.isInternational">
+            {{ ctx.isInternational ? 'International' : 'Domestic' }}
+          </span>
+        </div>
+        <p class="route-meta">
+          {{ ctx.flight.provider }} {{ ctx.flight.flightNumber }} · {{ ctx.flight.cabin }} ·
+          {{ ctx.flight.departureTime | date: 'EEE d MMM, HH:mm' : 'UTC' }} →
+          {{ ctx.flight.arrivalTime | date: 'HH:mm' : 'UTC' }}
+        </p>
+      </div>
+
+      <div class="card breakdown">
+        <h3>Price breakdown</h3>
+        <div class="breakdown-row">
+          <span>Per passenger</span>
+          <span>USD {{ ctx.flight.perPassenger | number: '1.2-2' }}</span>
+        </div>
+        <div class="breakdown-row">
+          <span>Passengers</span>
+          <span>× {{ ctx.criteria.passengers }}</span>
+        </div>
+        <div class="breakdown-row total">
+          <span>Total</span>
+          <span>USD {{ ctx.flight.total | number: '1.2-2' }}</span>
+        </div>
+      </div>
+
+      <form class="card passenger-form" [formGroup]="form" (ngSubmit)="confirm()">
+        <h3>Passenger details</h3>
+
+        @if (error()) {
+          <p class="banner-error">{{ error() }}</p>
+        }
+
+        <div class="field">
+          <label for="fullName">Full name</label>
+          <input id="fullName" type="text" formControlName="fullName" />
+          @if (form.controls.fullName.invalid && form.controls.fullName.touched) {
+            <p class="field-error">Full name is required.</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" type="email" formControlName="email" />
+          @if (form.controls.email.invalid && form.controls.email.touched) {
+            <p class="field-error">A valid email is required.</p>
+          }
+        </div>
+
+        <div class="field">
+          <label for="document">{{ documentLabel() }}</label>
+          <input id="document" type="text" formControlName="documentNumber" [placeholder]="documentPlaceholder()" />
+          @if (form.controls.documentNumber.invalid && form.controls.documentNumber.touched) {
+            <p class="field-error">{{ documentHint() }}</p>
+          }
+        </div>
+
+        <div class="actions">
+          <button type="button" class="btn-ghost" (click)="backToSearch()">← Back to results</button>
+          <button type="submit" class="btn-primary" [disabled]="submitting()">
+            {{ submitting() ? 'Confirming…' : 'Confirm booking' }}
+          </button>
+        </div>
+      </form>
+    </section>
+  }
+} @else {
+  <section class="card state-empty">
+    <h3>No flight selected</h3>
+    <p>Please start from the search screen.</p>
+    <button class="btn-primary" (click)="backToSearch()">Go to search</button>
+  </section>
+}

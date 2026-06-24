@@ -1,0 +1,112 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.25rem 0 0.75rem;
+}
+
+.count {
+  font-weight: 600;
+  color: var(--sky-muted);
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sort label {
+  margin: 0;
+}
+
+.sort select {
+  width: auto;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.airline {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.35rem;
+}
+
+.provider {
+  font-weight: 700;
+}
+
+.number {
+  color: var(--sky-muted);
+}
+
+.cabin {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  background: #eef3f9;
+  color: var(--sky-accent-dark);
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+}
+
+.times {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.05rem;
+}
+
+.arrow {
+  color: var(--sky-muted);
+}
+
+.duration {
+  font-size: 0.85rem;
+  color: var(--sky-muted);
+}
+
+.flight-price {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.total {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--sky-text);
+}
+
+.total-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sky-muted);
+}
+
+.per-person {
+  font-size: 0.85rem;
+  color: var(--sky-muted);
+  margin-top: 0.15rem;
+}

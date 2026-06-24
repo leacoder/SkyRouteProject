@@ -1,0 +1,23 @@
+# ---- .NET / Visual Studio ----
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.userprefs
+artifacts/
+TestResults/
+
+# ---- Angular / Node ----
+node_modules/
+dist/
+.angular/
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+*.swp

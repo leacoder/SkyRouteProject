@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  align-items: end;
+}
+
+.field-submit {
+  display: flex;
+}
+
+.field-submit button {
+  width: 100%;
+}

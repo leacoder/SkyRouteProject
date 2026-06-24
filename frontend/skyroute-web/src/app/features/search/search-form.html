@@ -1,0 +1,53 @@
+<form class="search-form card" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="grid">
+    <div class="field">
+      <label for="origin">From</label>
+      <select id="origin" formControlName="originCode">
+        @for (airport of airports(); track airport.code) {
+          <option [value]="airport.code">{{ airport.city }} ({{ airport.code }}) — {{ airport.country }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="destination">To</label>
+      <select id="destination" formControlName="destinationCode">
+        @for (airport of airports(); track airport.code) {
+          <option [value]="airport.code">{{ airport.city }} ({{ airport.code }}) — {{ airport.country }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="date">Departure</label>
+      <input id="date" type="date" formControlName="departureDate" />
+    </div>
+
+    <div class="field">
+      <label for="passengers">Passengers</label>
+      <input id="passengers" type="number" min="1" max="9" formControlName="passengers" />
+    </div>
+
+    <div class="field">
+      <label for="cabin">Cabin</label>
+      <select id="cabin" formControlName="cabin">
+        @for (cabin of cabins; track cabin) {
+          <option [value]="cabin">{{ cabin === 'First' ? 'First Class' : cabin }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field field-submit">
+      <button type="submit" class="btn-primary" [disabled]="loading()">
+        {{ loading() ? 'Searching…' : 'Search flights' }}
+      </button>
+    </div>
+  </div>
+
+  @if (form.errors?.['sameAirport']) {
+    <p class="field-error">Origin and destination must be different.</p>
+  }
+  @if (form.controls.passengers.invalid && form.controls.passengers.touched) {
+    <p class="field-error">Passengers must be between 1 and 9.</p>
+  }
+</form>
