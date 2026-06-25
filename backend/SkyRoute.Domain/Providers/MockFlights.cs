@@ -34,11 +34,21 @@ internal static class MockFlights
         new("BW360", 22, 410, 90m),
     ];
 
+    private static readonly Leg[] ArcticAirSchedule =
+    [
+        new("AR501", 7, 410, 175m),
+        new("AR288", 15, 470, 140m),
+        new("AR744", 21, 360, 210m),
+    ];
+
     public static IReadOnlyList<Flight> GlobalAir(SearchCriteria criteria) =>
         Build("GlobalAir", GlobalAirSchedule, criteria);
 
     public static IReadOnlyList<Flight> BudgetWings(SearchCriteria criteria) =>
         Build("BudgetWings", BudgetWingsSchedule, criteria);
+
+    public static IReadOnlyList<Flight> ArcticAir(SearchCriteria criteria) =>
+        Build("ArcticAir", ArcticAirSchedule, criteria);
 
     private static IReadOnlyList<Flight> Build(string providerName, IEnumerable<Leg> schedule, SearchCriteria criteria)
     {

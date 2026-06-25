@@ -30,6 +30,7 @@ builder.Services.AddSingleton<BookingService>();
 // Flight providers. Onboarding an airline is exactly ONE line here — nothing else changes (OCP).
 builder.Services.AddSingleton<IFlightProvider, GlobalAirProvider>();
 builder.Services.AddSingleton<IFlightProvider, BudgetWingsProvider>();
+builder.Services.AddSingleton<IFlightProvider, ArcticAirProvider>();
 
 var app = builder.Build();
 

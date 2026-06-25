@@ -1,6 +1,6 @@
 # SkyRoute — Flight Search & Booking
 
-A small but production-shaped slice of a flight aggregator: search across two mocked airline providers,
+A small but production-shaped slice of a flight aggregator: search across three mocked airline providers,
 compare prices, and book. Angular frontend + .NET backend, running locally.
 
 - **Backend:** .NET 10, ASP.NET Core (controllers), xUnit (v3).
@@ -56,7 +56,7 @@ dotnet test
 
 The suite is concentrated where it matters: the pricing rules, the `Price` pipeline, and the rounding
 mode (the graded business core), plus two `FlightSearchService` tests — aggregation across providers and
-resilience when one provider fails — **14 tests total**. (Use `dotnet test -c Release` if Smart App
+resilience when one provider fails — **20 tests total**. (Use `dotnet test -c Release` if Smart App
 Control blocks the Debug build, per the note above.)
 
 ---
@@ -121,6 +121,7 @@ does not match the route's required type).
   |---|---|---|
   | GlobalAir | base + 15% fuel surcharge, rounded to 2dp | 230.00 / passenger → **460.00** total |
   | BudgetWings | base − 10% (on base only), **min $29.99 per ticket** | 180.00 / passenger → **360.00** total |
+  | ArcticAir | base × 1.20 − $10 loyalty discount, **min $49.99 per ticket** | 230.00 / passenger → **460.00** total |
 
 - **The backend is the source of truth.** It owns the airport→country map, so it decides international vs
   domestic, derives the required document (Passport vs National ID), **re-validates** the document number, and
@@ -142,8 +143,8 @@ does not match the route's required type).
 ```
 backend/
   SkyRoute.Domain/        Money, Airport, SearchCriteria, Flight, Booking, RouteRules,
-                          Pricing/ (IPricingRule, Price, PricePerPassenger, Rounding, the two rules),
-                          Providers/ (IFlightProvider, the two providers, MockFlights),
+                          Pricing/ (IPricingRule, Price, PricePerPassenger, Rounding, the three rules),
+                          Providers/ (IFlightProvider, the three providers, MockFlights),
                           FlightSearchService, BookingService, AirportCatalog
   SkyRoute.Api/           Controllers, Contracts (DTOs + mapping), DomainExceptionHandler, Program.cs
   SkyRoute.Domain.Tests/  Pricing rule / Price / rounding-mode / route-rule / search-aggregation tests
